@@ -1,3 +1,4 @@
+import 'package:e_commerce_application/router.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,9 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Amazon',
       theme: ThemeData(
-        
+
       ),
       home: const Text( 'Flutter Demo Home Page'),
+      onGenerateRoute: (settings) => generateRoute(settings),
     );
   }
 }
