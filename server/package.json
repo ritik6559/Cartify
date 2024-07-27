@@ -7,5 +7,10 @@
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "http": "^0.0.1-security",
+    "mongoose": "^8.5.1"
+  }
 }
