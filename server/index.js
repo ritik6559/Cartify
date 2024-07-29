@@ -1,10 +1,10 @@
 //IMPORT FROM PACKAGES
-const express = require('express');//importing express
-const moongose = require('mongoose');
-const User = require('./models/user');
+const express = require("express");//importing express
+const mongoose = require("mongoose");
+const User = require("./models/user");
 
 //IMPORT FROM OTHER FILES
-const authRouter = require('./routes/auth');
+const authRouter = require("./routes/auth");
 
 //INITIALIZATION
 const PORT = 3000;//this is a template
@@ -17,7 +17,7 @@ app.use(authRouter);
 
 
 //CONNECTIONS
-moongose
+mongoose
     .connect(DB)
     .then(() => {
     console.log('Connection Successful')
