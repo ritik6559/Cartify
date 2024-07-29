@@ -1,6 +1,7 @@
 import 'package:e_commerce_application/common/widgets/custom_button.dart';
 import 'package:e_commerce_application/common/widgets/custom_text_field.dart';
 import 'package:e_commerce_application/constants/global_variables.dart';
+import 'package:e_commerce_application/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 enum Auth {
@@ -24,6 +25,24 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final AuthService authService = AuthService();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _nameController.dispose();
+    _emailController.dispose();
+    _emailController.dispose();
+  }
+
+  void signUpUser() {
+    authService.signUpUser(
+      email: _emailController.text,
+      password: _passwordController.text,
+      name: _nameController.text,
+      context: context,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +113,11 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                       CustomButton(
                         text: 'Sign Up',
-                        onTap: () {},
+                        onTap: () {
+                          if (_signInformKey.currentState!.validate()) {
+                            signUpUser();
+                          }
+                        },
                         color: GlobalVariables.secondaryColor,
                       ),
                       const SizedBox(
