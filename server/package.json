@@ -13,6 +13,7 @@
     "bcryptjs": "^2.4.3",
     "express": "^4.19.2",
     "http": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.1"
   },
