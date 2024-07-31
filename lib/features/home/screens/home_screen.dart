@@ -1,8 +1,9 @@
 import 'package:e_commerce_application/constants/global_variables.dart';
 import 'package:e_commerce_application/features/home/widgets/address_box.dart';
-import 'package:e_commerce_application/providers/user_provider.dart';
+import 'package:e_commerce_application/features/home/widgets/carousel_image.dart';
+import 'package:e_commerce_application/features/home/widgets/deal_of_the_day.dart';
+import 'package:e_commerce_application/features/home/widgets/top_categories.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
@@ -15,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserProvider>(context).user;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -89,10 +89,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: const Column(
-        children: [
-          AddressBox(),
-        ],
+      body: const SingleChildScrollView(
+        child: Column(
+          children: [
+            AddressBox(),
+            SizedBox(height: 10),
+            TopCategories(),
+            SizedBox(height: 10),
+            CarouselImage(),
+            SizedBox(height: 10),
+            DealOfTheDay(),
+          ],
+        ),
       ),
     );
   }
