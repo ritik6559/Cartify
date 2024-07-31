@@ -10,6 +10,11 @@ class AccountScreen extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: AppBar(
+          title: Row(
+            children: [
+              
+            ],
+          ),
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: GlobalVariables.appBarGradient,

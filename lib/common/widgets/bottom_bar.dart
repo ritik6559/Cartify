@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart' as badges;
 import 'package:e_commerce_application/constants/global_variables.dart';
+import 'package:e_commerce_application/features/account/screens/account_screen.dart';
 import 'package:e_commerce_application/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class _BottomBarState extends State<BottomBar> {
 
   List<Widget> pages = [
     const HomeScreen(),
-    // const AccountScreen(),
+    const AccountScreen(),
     // const CartScreen(),
   ];
 
