@@ -10,6 +10,20 @@ class PostsScreen extends StatefulWidget {
 class _PostsScreenState extends State<PostsScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        shape: const CircleBorder(),
+        tooltip: "Add Products",
+        onPressed: () {},
+        child: IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.add),
+        ),
+      ),
+      body: const Center(
+        child: Text('Products'),
+      ),
+    );
   }
 }
