@@ -9,7 +9,8 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.controller,
     required this.hintText,
-    this.maxLines = 1, required this.obsureText,
+    this.maxLines = 1,
+    this.obsureText = false,
   });
 
   @override

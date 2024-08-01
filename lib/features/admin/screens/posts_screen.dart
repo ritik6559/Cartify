@@ -1,3 +1,4 @@
+import 'package:e_commerce_application/features/admin/screens/add_product_screen.dart';
 import 'package:flutter/material.dart';
 
 class PostsScreen extends StatefulWidget {
@@ -8,6 +9,10 @@ class PostsScreen extends StatefulWidget {
 }
 
 class _PostsScreenState extends State<PostsScreen> {
+  void navigateToProductScreen() {
+    Navigator.pushNamed(context, AddProductScreen.routeName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +22,7 @@ class _PostsScreenState extends State<PostsScreen> {
         tooltip: "Add Products",
         onPressed: () {},
         child: IconButton(
-          onPressed: () {},
+          onPressed: navigateToProductScreen,
           icon: const Icon(Icons.add),
         ),
       ),
