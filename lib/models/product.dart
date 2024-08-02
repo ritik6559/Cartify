@@ -17,8 +17,8 @@ class Product {
     required this.images,
     required this.category,
     required this.price,
-    required this.id,
-    required this.userId,
+    this.id,
+    this.userId,
   });
   //rating
 
