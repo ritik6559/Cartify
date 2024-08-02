@@ -7,6 +7,7 @@ import 'package:e_commerce_application/common/widgets/custom_button.dart';
 import 'package:e_commerce_application/common/widgets/custom_text_field.dart';
 import 'package:e_commerce_application/constants/global_variables.dart';
 import 'package:e_commerce_application/constants/utils.dart';
+import 'package:e_commerce_application/features/admin/services/admin_services.dart';
 import 'package:flutter/material.dart';
 
 class AddProductScreen extends StatefulWidget {
@@ -24,6 +25,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController quantityController = TextEditingController();
 
   List<File> images = [];
+  final AdminServices adminServices = AdminServices();
+  final _addProductKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -50,6 +53,20 @@ class _AddProductScreenState extends State<AddProductScreen> {
     });
   }
 
+  void sellProduct() {
+    if (_addProductKey.currentState!.validate() && images.isNotEmpty) {
+      adminServices.sellProducts(
+        context: context,
+        name: productController.text,
+        description: descriptionController.text,
+        price: double.parse(priceController.text),
+        quantity: double.parse(quantityController.text),
+        category: category,
+        images: images,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,6 +91,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Form(
+            key: _addProductKey,
             child: Column(
               children: [
                 images.isNotEmpty
@@ -196,7 +214,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 ),
                 CustomButton(
                   text: 'Sell',
-                  onTap: () {},
+                  onTap: sellProduct,
                   color: GlobalVariables.secondaryColor,
                 )
               ],
