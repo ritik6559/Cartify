@@ -76,7 +76,7 @@ class AdminServices {
 
   //GET ALL PRODUCTS
   Future<List<Product>> fetchAllProducts(BuildContext context) async {
-    final userProvider = Provider.of<UserProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<Product> productsList = [];
     try {
       http.Response res = await http.get(
@@ -91,7 +91,7 @@ class AdminServices {
         response: res,
         context: context,
         onSuccess: () {
-          for (int i = 0; i < jsonDecode(res.body); i++) {
+          for (int i = 0; i < jsonDecode(res.body).length; i++) {
             productsList.add(
               Product.fromJson(
                 jsonEncode(
@@ -103,6 +103,7 @@ class AdminServices {
         },
       );
     } catch (e) {
+      print(e.toString());
       showSnackBar(context, e.toString());
     }
 
