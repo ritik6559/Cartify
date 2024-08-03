@@ -126,9 +126,9 @@ class AdminServices {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': userProvider.user.token,
         },
-        body: {
+        body: jsonEncode({
           'id': product.id,
-        },
+        }),
       );
 
       httpErrorHandle(

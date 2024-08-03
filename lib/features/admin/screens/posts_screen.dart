@@ -32,6 +32,7 @@ class _PostsScreenState extends State<PostsScreen> {
       product: product,
       onSuccess: () {
         products!.removeAt(index);
+        setState(() {});
       },
     );
   }
