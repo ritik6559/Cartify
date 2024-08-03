@@ -17,6 +17,7 @@ const DB = "mongodb+srv://ritikjoshi741:9456597017ritik@cluster0.s4rbcq6.mongodb
 app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
+app.use(productRouter);
 
 
 //CONNECTIONS

@@ -14,7 +14,7 @@ class HomeService {
     required BuildContext context,
     required String category,
   }) async {
-    final userProvider = Provider.of<UserProvider>(context,listen: false);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<Product> productList = [];
     try {
       http.Response res = await http.get(
@@ -41,6 +41,7 @@ class HomeService {
         },
       );
     } catch (e) {
+      print(e.toString());
       showSnackBar(
         context,
         e.toString(),
