@@ -43,6 +43,7 @@ dependencies:
   dotted_border: ^2.1.0
   file_picker: ^8.0.0+1
   cloudinary_public: ^0.23.1
+  elegant_notification: ^2.2.2
 
 dev_dependencies:
   flutter_test:
