@@ -6,6 +6,7 @@ const User = require("./models/user");
 //IMPORT FROM OTHER FILES
 const authRouter = require("./routes/auth");
 const adminRouter = require("./routes/admin");
+const productRouter = require('./routes/product');
 
 //INITIALIZATION
 const PORT = 3000;//this is a template
