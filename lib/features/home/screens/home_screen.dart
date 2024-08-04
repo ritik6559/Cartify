@@ -3,6 +3,7 @@ import 'package:e_commerce_application/features/home/widgets/address_box.dart';
 import 'package:e_commerce_application/features/home/widgets/carousel_image.dart';
 import 'package:e_commerce_application/features/home/widgets/deal_of_the_day.dart';
 import 'package:e_commerce_application/features/home/widgets/top_categories.dart';
+import 'package:e_commerce_application/features/search/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,6 +15,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void navigateToSearchScreen(String query) {
+    Navigator.pushNamed(
+      context,
+      SearchScreen.routeName,
+      arguments: query,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: BorderRadius.circular(7),
                     elevation: 1,
                     child: TextFormField(
+                      onFieldSubmitted: navigateToSearchScreen,
                       decoration: InputDecoration(
+                        
                         filled: true,
                         fillColor: Colors.white,
                         contentPadding: const EdgeInsets.only(top: 10),
@@ -53,7 +64,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         hintText: "Search Amazon.in",
                         hintStyle: const TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 117,
+                          color: Colors.grey,
+                          fontSize: 17,
                         ),
                         prefixIcon: InkWell(
                           onTap: () {},

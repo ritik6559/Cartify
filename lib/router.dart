@@ -18,26 +18,29 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const HomeScreen(),
       );
-    case  BottomBar.routeName:
+    case BottomBar.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const BottomBar(),
       );
-    case  AddProductScreen.routeName:
+    case AddProductScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const AddProductScreen(),
       );
-    case  CategoryDealsScreen.routeName:
-    var category = routeSettings.arguments as String;
+    case CategoryDealsScreen.routeName:
+      var category = routeSettings.arguments as String;
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => CategoryDealsScreen(category: category,),
+        builder: (_) => CategoryDealsScreen(
+          category: category,
+        ),
       );
-    case  SearchScreen.routeName:
+    case SearchScreen.routeName:
+      var searchQuery = routeSettings.arguments as String;
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => const SearchScreen(),
+        builder: (_) => SearchScreen(searchQuery: searchQuery,),
       );
     default:
       return MaterialPageRoute(
