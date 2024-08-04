@@ -134,7 +134,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         onTap: () {
                           Navigator.pushNamed(
                             context,
-                            ProductDetailsScreen.routeName,
+                            ProductDetailScreen.routeName,
                             arguments: searchedProducts![index],
                           );
                         },
