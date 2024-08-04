@@ -2,6 +2,7 @@ import 'package:e_commerce_application/common/widgets/loader.dart';
 import 'package:e_commerce_application/constants/global_variables.dart';
 import 'package:e_commerce_application/features/home/widgets/address_box.dart';
 import 'package:e_commerce_application/features/search/services/search_services.dart';
+import 'package:e_commerce_application/features/search/widgets/searched_products.dart';
 import 'package:e_commerce_application/models/product.dart';
 import 'package:flutter/material.dart';
 
@@ -125,11 +126,12 @@ class _SearchScreenState extends State<SearchScreen> {
                 AddressBox(),
                 const SizedBox(height: 10),
                 Expanded(
-                  
                   child: ListView.builder(
                     itemCount: searchedProducts!.length,
                     itemBuilder: (context, index) {
-                      
+                      return SearchedProduct(
+                        product: searchedProducts![index],
+                      );
                     },
                   ),
                 ),

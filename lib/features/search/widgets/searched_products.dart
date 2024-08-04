@@ -1,3 +1,4 @@
+import 'package:e_commerce_application/common/widgets/stars.dart';
 import 'package:e_commerce_application/models/product.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +40,11 @@ class SearchedProduct extends StatelessWidget {
                     ),
                   ),
 
-                  
+                  Container(
+                    width: 235,
+                    padding: const EdgeInsets.only(left: 10, top: 5),
+                    child: const Stars(rating: 4)
+                  ),
                   
                   Container(
                     width: 235,
