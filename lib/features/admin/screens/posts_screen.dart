@@ -58,15 +58,16 @@ class _PostsScreenState extends State<PostsScreen> {
                 icon: const Icon(Icons.add),
               ),
             ),
-            body: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: GridView.builder(
-                itemCount: products!.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                itemBuilder: (context, index) {
-                  final productData = products![index];
-                  return Column(
+            body: GridView.builder(
+              itemCount: products!.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+              ),
+              itemBuilder: (context, index) {
+                final productData = products![index];
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
                     children: [
                       SizedBox(
                         height: 140,
@@ -85,7 +86,7 @@ class _PostsScreenState extends State<PostsScreen> {
                             ),
                           ),
                           IconButton(
-                            onPressed: () => deleteProduct(productData,index),
+                            onPressed: () => deleteProduct(productData, index),
                             icon: const Icon(
                               Icons.delete_outline,
                             ),
@@ -93,9 +94,9 @@ class _PostsScreenState extends State<PostsScreen> {
                         ],
                       ),
                     ],
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
           );
   }
