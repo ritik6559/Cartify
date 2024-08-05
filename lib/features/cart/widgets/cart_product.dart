@@ -1,3 +1,4 @@
+import 'package:e_commerce_application/features/cart/services/cart_services.dart';
 import 'package:e_commerce_application/features/product_details/services/product_details_services.dart';
 import 'package:e_commerce_application/models/product.dart';
 import 'package:e_commerce_application/providers/user_provider.dart';
@@ -19,11 +20,27 @@ class _CartProductState extends State<CartProduct> {
   final ProductDetailsServices productDetailsServices =
       ProductDetailsServices();
 
+  final CartServices cartServices = CartServices();
+
+  void increaseQuantity(Product product) {
+    productDetailsServices.addToCart(
+      context: context,
+      product: product,
+    );
+  }
+
+  void decreaseQuantity(Product product) {
+    cartServices.removeFromCart(
+      context: context,
+      product: product,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final productCart = context.watch<UserProvider>().user.cart[widget.index];
-    final product = Product.fromMap(productCart['product']);//productCart contains both product and quantity therefore we are explicitly defining product.
+    final product = Product.fromMap(productCart[
+        'product']); //productCart contains both product and quantity therefore we are explicitly defining product.
     final quantity = productCart['quantity'];
 
     return Column(
@@ -103,7 +120,7 @@ class _CartProductState extends State<CartProduct> {
                 child: Row(
                   children: [
                     InkWell(
-                      onTap: (){},
+                      onTap: () => decreaseQuantity(product),
                       child: Container(
                         width: 35,
                         height: 32,
@@ -130,7 +147,7 @@ class _CartProductState extends State<CartProduct> {
                       ),
                     ),
                     InkWell(
-                      onTap: (){},
+                      onTap: () => increaseQuantity(product),
                       child: Container(
                         width: 35,
                         height: 32,
