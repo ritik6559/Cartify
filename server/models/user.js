@@ -1,4 +1,5 @@
 const moongose = require('mongoose');
+const { productSchema } = require('./product');
 
 const userSchema = moongose.Schema({
     name:{
@@ -31,7 +32,15 @@ const userSchema = moongose.Schema({
         type: String,
         default: 'user',
     },
-    //cart
+    cart: [
+        {
+            product: productSchema,
+            quantity : {
+                type: Number,
+                required: true,
+            }
+        }
+    ]
 });
 
 const User = moongose.model('User', userSchema);
