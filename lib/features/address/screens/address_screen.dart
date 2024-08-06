@@ -1,5 +1,6 @@
 import 'package:e_commerce_application/common/widgets/custom_text_field.dart';
 import 'package:e_commerce_application/constants/global_variables.dart';
+import 'package:e_commerce_application/constants/utils.dart';
 import 'package:e_commerce_application/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
@@ -8,7 +9,11 @@ import 'package:provider/provider.dart';
 
 class AddressScreen extends StatefulWidget {
   static const String routeName = '/address';
-  const AddressScreen({super.key});
+  final String totalAmount;
+  const AddressScreen({
+    super.key,
+    required this.totalAmount,
+  });
 
   @override
   State<AddressScreen> createState() => _AddressScreenState();
@@ -20,8 +25,7 @@ class _AddressScreenState extends State<AddressScreen> {
   final TextEditingController pincodeController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
   final _addressFormKey = GlobalKey<FormState>();
-
-  void onApplePayResult(res) {}
+  String addressToBeUsed = "";
 
   List<PaymentItem> paymentItems = [];
 
@@ -31,22 +35,46 @@ class _AddressScreenState extends State<AddressScreen> {
   void initState() {
     super.initState();
     _googlePayConfigFuture = PaymentConfiguration.fromAsset('gpay.json');
+    paymentItems.add(
+      PaymentItem(
+        amount: widget.totalAmount,
+        label: 'Total Amount',
+        status: PaymentItemStatus.final_price,
+      ),
+    );
+  }
+
+  void onGooglePayResult(paymentResult) {
+    debugPrint(paymentResult.toString());
+  }
+
+  void payPressed(String addressFromProvider) {
+    addressToBeUsed = "";
+
+    //checking which address to use default or the new one
+    //if all the textfield are empty means we are using the default address.
+
+    bool isForm = flatBuildingController.text.isNotEmpty ||
+        areaController.text.isNotEmpty ||
+        pincodeController.text.isNotEmpty ||
+        cityController.text.isNotEmpty;
+
+    if (isForm) {
+      if (_addressFormKey.currentState!.validate()) {
+        addressToBeUsed =
+            '${flatBuildingController.text}, ${areaController.text}, ${cityController.text} - ${pincodeController.text}';
+      } else {
+        throw Exception('Please enter all the values!');
+      }
+    } else if (addressFromProvider.isNotEmpty) {
+      addressToBeUsed = addressFromProvider;
+    } else {
+      showSnackBar(context, 'ERROR');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    const _paymentItems = [
-      PaymentItem(
-        label: 'Total',
-        amount: '99.99',
-        status: PaymentItemStatus.final_price,
-      )
-    ];
-
-    void onGooglePayResult(paymentResult) {
-      debugPrint(paymentResult.toString());
-    }
-
     var address = context.watch<UserProvider>().user.address;
 
     return Scaffold(
@@ -126,13 +154,14 @@ class _AddressScreenState extends State<AddressScreen> {
                 future: _googlePayConfigFuture,
                 builder: (context, snapshot) => snapshot.hasData
                     ? GooglePayButton(
+                      onPressed: () => payPressed(address),
                         paymentConfiguration: snapshot.data!,
                         width: double.infinity,
-                        paymentItems: _paymentItems,
+                        paymentItems: paymentItems,
                         type: GooglePayButtonType.buy,
                         margin: const EdgeInsets.only(top: 15.0),
                         onPaymentResult: onGooglePayResult,
-                        theme: GooglePayButtonTheme.light,
+                        theme: GooglePayButtonTheme.dark,
                         loadingIndicator: const Center(
                           child: CircularProgressIndicator(),
                         ),
@@ -141,8 +170,6 @@ class _AddressScreenState extends State<AddressScreen> {
                         child: Text("hello"),
                       ),
               ),
-
-              
             ],
           ),
         ),
