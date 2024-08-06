@@ -1,6 +1,7 @@
 import 'package:e_commerce_application/common/widgets/custom_text_field.dart';
 import 'package:e_commerce_application/constants/global_variables.dart';
 import 'package:e_commerce_application/constants/utils.dart';
+import 'package:e_commerce_application/features/address/services/address_services.dart';
 import 'package:e_commerce_application/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
@@ -25,6 +26,7 @@ class _AddressScreenState extends State<AddressScreen> {
   final TextEditingController pincodeController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
   final _addressFormKey = GlobalKey<FormState>();
+  final AddressServices addressServices = AddressServices();
   String addressToBeUsed = "";
 
   List<PaymentItem> paymentItems = [];
@@ -44,8 +46,18 @@ class _AddressScreenState extends State<AddressScreen> {
     );
   }
 
-  void onGooglePayResult(paymentResult) {
-    debugPrint(paymentResult.toString());
+  void onGooglePayResult(res) {
+    if (Provider.of<UserProvider>(context,listen: false).user.address.isEmpty) {
+      addressServices.saveUserAddress(
+        context: context,
+        address: addressToBeUsed,
+      );
+    }
+    addressServices.placeOrder(
+      context: context,
+      address: addressToBeUsed,
+      totalSum: double.parse(widget.totalAmount),
+    );
   }
 
   void payPressed(String addressFromProvider) {
@@ -154,7 +166,7 @@ class _AddressScreenState extends State<AddressScreen> {
                 future: _googlePayConfigFuture,
                 builder: (context, snapshot) => snapshot.hasData
                     ? GooglePayButton(
-                      onPressed: () => payPressed(address),
+                        onPressed: () => payPressed(address),
                         paymentConfiguration: snapshot.data!,
                         width: double.infinity,
                         paymentItems: paymentItems,
