@@ -2,6 +2,8 @@ import 'package:e_commerce_application/common/widgets/custom_text_field.dart';
 import 'package:e_commerce_application/constants/global_variables.dart';
 import 'package:e_commerce_application/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:pay/pay.dart';
+
 import 'package:provider/provider.dart';
 
 class AddressScreen extends StatefulWidget {
@@ -19,8 +21,32 @@ class _AddressScreenState extends State<AddressScreen> {
   final TextEditingController cityController = TextEditingController();
   final _addressFormKey = GlobalKey<FormState>();
 
+  void onApplePayResult(res) {}
+
+  List<PaymentItem> paymentItems = [];
+
+  late final Future<PaymentConfiguration> _googlePayConfigFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _googlePayConfigFuture = PaymentConfiguration.fromAsset('gpay.json');
+  }
+
   @override
   Widget build(BuildContext context) {
+    const _paymentItems = [
+      PaymentItem(
+        label: 'Total',
+        amount: '99.99',
+        status: PaymentItemStatus.final_price,
+      )
+    ];
+
+    void onGooglePayResult(paymentResult) {
+      debugPrint(paymentResult.toString());
+    }
+
     var address = context.watch<UserProvider>().user.address;
 
     return Scaffold(
@@ -96,6 +122,27 @@ class _AddressScreenState extends State<AddressScreen> {
                   ],
                 ),
               ),
+              FutureBuilder<PaymentConfiguration>(
+                future: _googlePayConfigFuture,
+                builder: (context, snapshot) => snapshot.hasData
+                    ? GooglePayButton(
+                        paymentConfiguration: snapshot.data!,
+                        width: double.infinity,
+                        paymentItems: _paymentItems,
+                        type: GooglePayButtonType.buy,
+                        margin: const EdgeInsets.only(top: 15.0),
+                        onPaymentResult: onGooglePayResult,
+                        theme: GooglePayButtonTheme.light,
+                        loadingIndicator: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    : const SizedBox(
+                        child: Text("hello"),
+                      ),
+              ),
+
+              
             ],
           ),
         ),
