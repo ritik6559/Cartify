@@ -1,5 +1,6 @@
 import 'package:e_commerce_application/common/widgets/custom_button.dart';
 import 'package:e_commerce_application/constants/global_variables.dart';
+import 'package:e_commerce_application/features/address/screens/address_screen.dart';
 import 'package:e_commerce_application/features/cart/widgets/cart_product.dart';
 import 'package:e_commerce_application/features/home/widgets/address_box.dart';
 import 'package:e_commerce_application/features/cart/widgets/cart_subtotal.dart';
@@ -16,11 +17,19 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(
       context,
       SearchScreen.routeName,
       arguments: query,
+    );
+  }
+
+  void navigateToAddressScreen() {
+    Navigator.pushNamed(
+      context,
+      AddressScreen.routeName,
     );
   }
 
@@ -112,7 +121,7 @@ class _CartScreenState extends State<CartScreen> {
               padding: const EdgeInsets.all(8),
               child: CustomButton(
                 text: 'Proceed to Buy (${user.cart.length} items)',
-                onTap: () {},
+                onTap: navigateToAddressScreen,
                 color: Colors.yellow[600],
               ),
             ),
