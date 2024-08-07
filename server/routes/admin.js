@@ -59,5 +59,23 @@ adminRouter.get('/admin/get-orders',admin, async (req,res) => {
     }
     
 });
+
+
+//CHANGE ORDER STATUS
+adminRouter.post('/admin/change-status',admin, async (req,res) => {//post because we need to post the new peoducts after deleting product.
+    try{
+        const {id, status} = req.body;
+        let order = await Order.findBy(id);
+        order.status = status;
+        order = await order.save();
+        res.json(order);
+    } catch (e){
+        res.status(500).json({error: e.message});
+    }
+});
+
+
+
+
 module.exports = adminRouter;
 

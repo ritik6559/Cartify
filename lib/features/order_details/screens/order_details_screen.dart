@@ -1,8 +1,12 @@
+import 'package:e_commerce_application/common/widgets/custom_button.dart';
 import 'package:e_commerce_application/constants/global_variables.dart';
+import 'package:e_commerce_application/features/admin/services/admin_services.dart';
 import 'package:e_commerce_application/features/search/screens/search_screen.dart';
 import 'package:e_commerce_application/models/order.dart';
+import 'package:e_commerce_application/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
   static const String routeName = '/order-details';
@@ -17,12 +21,27 @@ class OrderDetailsScreen extends StatefulWidget {
 }
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
+  final AdminServices adminServices = AdminServices();
   int currentStep = 0;
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(
       context,
       SearchScreen.routeName,
       arguments: query,
+    );
+  }
+
+  //ONLY FOR ADMIN
+  void changeOrderStatus(int status) async {
+    adminServices.changeOrderStatus(
+      context: context,
+      status: status + 1,
+      order: widget.order,
+      onSuccess: () {
+        setState(() {
+          currentStep += 1;
+        });
+      },
     );
   }
 
@@ -34,6 +53,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -208,6 +228,12 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   currentStep: currentStep,
                   controlsBuilder: (context, details) {
                     //we need to remove those continue button since it should be available only to the admin.
+                    if (user.type == 'admin') {
+                      return CustomButton(
+                        text: 'Done',
+                        onTap: () => changeOrderStatus(details.currentStep),
+                      );
+                    }
                     return const SizedBox();
                   },
                   steps: [

@@ -1,4 +1,5 @@
 import 'package:e_commerce_application/constants/global_variables.dart';
+import 'package:e_commerce_application/features/admin/screens/orders_screen.dart';
 import 'package:e_commerce_application/features/admin/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -21,11 +22,7 @@ class _AdminScreenState extends State<AdminScreen> {
         'Analytics Page',
       ),
     ),
-    Center(
-      child: Text(
-        'Cart Page',
-      ),
-    ),
+    OrdersScreen(),
   ];
 
   void updatePage(int page) {
