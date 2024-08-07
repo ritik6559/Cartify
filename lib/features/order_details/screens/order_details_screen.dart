@@ -34,7 +34,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -201,9 +200,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               ),
               Container(
                 decoration: BoxDecoration(
-                    border: Border.all(
-                  color: Colors.black12,
-                )),
+                  border: Border.all(
+                    color: Colors.black12,
+                  ),
+                ),
                 child: Stepper(
                   currentStep: currentStep,
                   controlsBuilder: (context, details) {
@@ -213,7 +213,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   steps: [
                     Step(
                       isActive: currentStep > 0,
-                      state: currentStep > 0//by default it shows number when a step is completed but we need to show tick mark therefore tp get tick mark we are using state.
+                      state: currentStep >
+                              0 //by default it shows number when a step is completed but we need to show tick mark therefore tp get tick mark we are using state.
                           ? StepState.complete
                           : StepState.indexed,
                       title: const Text('Pending'),
@@ -248,7 +249,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
