@@ -12,7 +12,7 @@ const userRouter = require('./routes/user');
 //INITIALIZATION
 const PORT = 3000;//this is a template
 const app = express();
-const DB = "mongodb+srv://ritikjoshi741:9456597017ritik@cluster0.s4rbcq6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const DB = "mongodb+srv://<>@cluster0.s4rbcq6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 //middleware
 app.use(express.json());
