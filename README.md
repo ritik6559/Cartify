@@ -1,16 +1,31 @@
-# e_commerce_application
+# Amazon Clone
 
-A new Flutter project.
+This project is a full-stack Amazon clone built with Flutter for the frontend and Node.js, Express, and MongoDB for the backend. It includes both a mobile app for users and an admin panel for managing the platform.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+### Mobile App
+- User authentication and profile management
+- Browse products by category
+- Search functionality
+- Product details with ratings and reviews
+- Add products to cart
+- Checkout process
+- Order tracking
+- Rate and review products
 
-A few resources to get you started if this is your first Flutter project:
+### Admin Panel
+- Dashboard with key metrics
+- Manage products (add, edit, delete)
+- Manage categories
+- View and manage orders
+- User management
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Tech Stack
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Frontend:** Flutter
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **Authentication:** JWT
+
+
